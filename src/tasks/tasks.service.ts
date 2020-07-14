@@ -27,5 +27,10 @@ export class TasksService {
     findOneTask(id: string): Task {
         return this.tasks.find( task => task.id == id);
     }
+
+    remove(@Param('id') id: string) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        return this.tasks
+    }
 }
 
