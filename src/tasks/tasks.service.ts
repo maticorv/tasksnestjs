@@ -54,8 +54,8 @@ export class TasksService {
     }
 
     remove(@Param('id') id: string) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
-        return this.tasks
+        const found = this.findOneTask(id);
+        this.tasks = this.tasks.filter(task => task.id !== found.id)    
     }
 
     updateTask(@Param('id') id: string, @Body() createTaskDTO: CreateTaskDTO): Task {
