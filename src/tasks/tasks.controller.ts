@@ -9,6 +9,7 @@ export class TasksController {
     constructor(private teskService: TasksService) {};
     
     @Get()
+    @UsePipes(ValidationPipe)
     GetAllTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
       if(Object.keys(filterDto).length) {
         return this.teskService.getAllTasksWithFilters(filterDto)
