@@ -7,6 +7,27 @@ import { Task } from './task.entity';
 @Controller('tasks')
 export class TasksController {
     constructor(private teskService: TasksService) {};
+
+    @Post()
+    @UsePipes(ValidationPipe)
+    create(@Body() createUserDto: CreateTaskDTO): Promise<Task> {
+      return this.teskService.create(createUserDto);
+    }
+
+    @Get()
+    findAll(): Promise<Task[]> {
+      return this.teskService.findAll();
+    }
+  
+    @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+      return this.teskService.findOne(id);
+    }
+  
+    @Delete(':id')
+    remove(@Param('id', ParseIntPipe) id: string): Promise<void> {
+      return this.teskService.remove(id);
+    }
     
     // @Get()
     // @UsePipes(ValidationPipe)
@@ -25,12 +46,6 @@ export class TasksController {
     //     return this.teskService.createTask(createTaskDTO);
     // }
 
-    @Get(':id')
-    findOneTask(@Param('id', ParseIntPipe) id: number):  Promise<Task> {
-        return this.teskService.getTaskById(id);
-    }
-
-    
     // @Delete(':id')
     // remove(@Param('id') id: string) {
     //   return this.teskService.remove(id);
