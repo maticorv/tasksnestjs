@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enum';
 import { TaskRepository } from './task.repository';
+import { UpdateTaskDTO } from './dto/update-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -34,6 +35,19 @@ export class TasksService {
         if (result.affected === 0) {
             throw new NotFoundException(`Task with ID ${id} not found`);
         }
+    }
+
+    async update(id: number, updateTaskDto: UpdateTaskDTO): Promise<Task> {
+        const taskToUpdate = await this.taskRepository.findOne(id);
+        if (!taskToUpdate) {
+            throw new NotFoundException(`Task with ID ${id} not found`);
+        }
+        taskToUpdate.title = updateTaskDto.title;
+        taskToUpdate.description = updateTaskDto.description;
+
+        await taskToUpdate.save();
+        return taskToUpdate;
+
     }
     
     // getAllTasks(): Task[] {

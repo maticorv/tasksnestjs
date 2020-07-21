@@ -3,6 +3,7 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { Task } from './task.entity';
+import { UpdateTaskDTO } from './dto/update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -10,8 +11,8 @@ export class TasksController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    create(@Body() createUserDto: CreateTaskDTO): Promise<Task> {
-      return this.teskService.create(createUserDto);
+    create(@Body() createTaskDto: CreateTaskDTO): Promise<Task> {
+      return this.teskService.create(createTaskDto);
     }
 
     @Get()
@@ -27,6 +28,15 @@ export class TasksController {
     @Delete(':id')
     remove(@Param('id', ParseIntPipe) id: string): Promise<void> {
       return this.teskService.remove(id);
+    }
+
+    @Put(':id')
+    @UsePipes(ValidationPipe)
+    update(
+      @Param('id', ParseIntPipe) id: number,
+      @Body() updateTaskDto: UpdateTaskDTO
+      ): Promise<Task> {
+      return this.teskService.update(id, updateTaskDto);
     }
     
     // @Get()
