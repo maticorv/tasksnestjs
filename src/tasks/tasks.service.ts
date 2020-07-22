@@ -26,6 +26,10 @@ export class TasksService {
         return this.taskRepository.createTask(createTaskDTO);
     }
 
+    getAllTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+        return this.taskRepository.getTasks(filterDto);
+    }
+    
     async findAll(): Promise<Task[]> {
         return this.taskRepository.find();
     }

@@ -16,8 +16,10 @@ export class TasksController {
     }
 
     @Get()
-    findAll(): Promise<Task[]> {
-      return this.teskService.findAll();
+    getAllTasks(
+      @Query(ValidationPipe) filterDto: GetTasksFilterDto
+    ): Promise<Task[]> {
+      return this.teskService.getAllTasks(filterDto);
     }
   
     @Get(':id')
