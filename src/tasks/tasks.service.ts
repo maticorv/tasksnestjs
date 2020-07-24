@@ -42,8 +42,8 @@ export class TasksService {
         }
     }
 
-    async update(id: number, updateTaskDto: UpdateTaskDTO): Promise<Task> {
-        const taskToUpdate = await this.taskRepository.findOne(id);
+    async update(id: number, updateTaskDto: UpdateTaskDTO, user: User): Promise<Task> {
+        const taskToUpdate = await this.taskRepository.findOne({where: {id, userId: user.id}});
         if (!taskToUpdate) {
             throw new NotFoundException(`Task with ID ${id} not found`);
         }

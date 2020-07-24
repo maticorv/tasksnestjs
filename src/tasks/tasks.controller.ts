@@ -47,9 +47,10 @@ export class TasksController {
     @UsePipes(ValidationPipe)
     update(
       @Param('id', ParseIntPipe) id: number,
-      @Body() updateTaskDto: UpdateTaskDTO
+      @Body() updateTaskDto: UpdateTaskDTO,
+      @GetUser() user: User,
       ): Promise<Task> {
-      return this.teskService.update(id, updateTaskDto);
+      return this.teskService.update(id, updateTaskDto, user);
     }
     
     // @Get()
