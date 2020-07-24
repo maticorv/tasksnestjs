@@ -5,6 +5,8 @@ import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { Task } from './task.entity';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -13,8 +15,11 @@ export class TasksController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    create(@Body() createTaskDto: CreateTaskDTO): Promise<Task> {
-      return this.teskService.create(createTaskDto);
+    create(
+      @Body() createTaskDto: CreateTaskDTO,
+      @GetUser() user: User,
+    ): Promise<Task> {
+      return this.teskService.create(createTaskDto, user);
     }
 
     @Get()
