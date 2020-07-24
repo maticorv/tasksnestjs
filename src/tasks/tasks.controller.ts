@@ -31,8 +31,11 @@ export class TasksController {
     }
   
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-      return this.teskService.findOne(id);
+    findOne(
+      @Param('id', ParseIntPipe) id: number,
+      @GetUser() user: User,
+    ): Promise<Task> {
+      return this.teskService.findOne(id, user);
     }
   
     @Delete(':id')
