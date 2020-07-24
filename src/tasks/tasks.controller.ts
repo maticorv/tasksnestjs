@@ -39,8 +39,11 @@ export class TasksController {
     }
   
     @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: string): Promise<void> {
-      return this.teskService.remove(id);
+    remove(
+      @Param('id', ParseIntPipe) id: number,
+      @GetUser() user: User,
+    ): Promise<void> {
+      return this.teskService.remove(id, user);
     }
 
     @Put(':id')
