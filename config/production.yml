@@ -1,0 +1,10 @@
+  
+server:
+  origin: http://nestjs-task-management-frontend.s3-website-eu-west-1.amazonaws.com
+
+db:
+  synchronize: false
+  type: 'postgres'
+  port: 5432
+  database: 'taskmanager'
+  password: '1Aj52a4fBrE9kAAj'
