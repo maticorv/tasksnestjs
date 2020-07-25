@@ -1,9 +1,10 @@
 import { BaseEntity, Entity, PrimaryColumn, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { User } from '../auth/user.entity';
+import { GenericEntity } from 'src/shared/entities/generic.entity';
 
 @Entity()
-export class Task extends BaseEntity {
+export class Task extends GenericEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
