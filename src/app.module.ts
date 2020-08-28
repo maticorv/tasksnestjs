@@ -5,6 +5,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import * as config from 'config';
+import { GenericEntity } from './shared/entities/generic.entity';
 
 const dbConfig = config.get('db')
 @Module({
@@ -22,6 +23,6 @@ const dbConfig = config.get('db')
     TasksModule,
     AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthModule],
 })
 export class AppModule {}

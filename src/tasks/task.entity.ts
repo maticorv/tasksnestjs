@@ -4,7 +4,7 @@ import { User } from '../auth/user.entity';
 import { GenericEntity } from 'src/shared/entities/generic.entity';
 
 @Entity()
-export class Task extends GenericEntity {
+export class Task extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
